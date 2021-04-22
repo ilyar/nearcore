@@ -234,16 +234,16 @@ fn apply_block_at_height(
         runtime
             .apply_transactions(
                 shard_id,
-                &chunk_inner.prev_state_root,
+                chunk_inner.prev_state_root(),
                 height,
                 block.header().raw_timestamp(),
                 block.header().prev_hash(),
                 block.hash(),
                 &receipts,
                 chunk.transactions(),
-                &chunk_inner.validator_proposals,
+                chunk_inner.validator_proposals(),
                 prev_block.header().gas_price(),
-                chunk_inner.gas_limit,
+                chunk_inner.gas_limit(),
                 &block.header().challenges_result(),
                 *block.header().random_value(),
                 true,
@@ -256,23 +256,22 @@ fn apply_block_at_height(
         runtime
             .apply_transactions(
                 shard_id,
-                &chunk_extra.state_root,
+                chunk_extra.state_root(),
                 block.header().height(),
                 block.header().raw_timestamp(),
                 block.header().prev_hash(),
                 &block.hash(),
                 &[],
                 &[],
-                &chunk_extra.validator_proposals,
+                chunk_extra.validator_proposals(),
                 block.header().gas_price(),
-                chunk_extra.gas_limit,
+                chunk_extra.gas_limit(),
                 &block.header().challenges_result(),
                 *block.header().random_value(),
                 false,
             )
             .unwrap()
     };
-
     let (outcome_root, _) = ApplyTransactionResult::compute_outcomes_proof(&apply_result.outcomes);
     let chunk_extra = ChunkExtra::new(
         &apply_result.new_root,
