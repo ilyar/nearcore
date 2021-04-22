@@ -4765,6 +4765,13 @@ dependencies = [
 ]
 
 [[package]]
+name = "restored-receipts-verifier"
+version = "0.1.0"
+dependencies = [
+ "syn 1.0.60",
+]
+
+[[package]]
 name = "ring"
 version = "0.16.20"
 source = "registry+https://github.com/rust-lang/crates.io-index"
